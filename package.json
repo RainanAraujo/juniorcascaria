@@ -11,15 +11,19 @@
   "dependencies": {
     "@types/feather-icons": "^4.7.0",
     "feather-icons": "^4.28.0",
+    "dotenv": "^10.0.0",
+    "firebase": "^8.6.8",
     "next": "11.0.1",
     "next-images": "^1.8.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-feather": "^2.0.9",
+    "react-google-recaptcha": "^2.1.0",
     "styled-components": "^5.3.0"
   },
   "devDependencies": {
     "@types/react": "17.0.11",
+    "@types/react-google-recaptcha": "^2.1.0",
     "@types/styled-components": "^5.1.10",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
