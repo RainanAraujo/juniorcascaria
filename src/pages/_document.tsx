@@ -42,6 +42,13 @@ export default class MyDocument extends Document {
       <Html lang="pt">
         <Head>
           <meta charSet="utf-8" />
+
+          <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap"
+            rel="stylesheet"
+          />
+          <script src="https://unpkg.com/feather-icons"></script>
+          <title>JUNIOR CASCARIA | TALENTOS DA TERRA</title>
         </Head>
         <body>
           <Main />
