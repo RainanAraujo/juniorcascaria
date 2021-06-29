@@ -24,6 +24,7 @@ export const Content = styled.div`
   width: 100%;
   min-height: 80vh;
   height: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,6 +59,9 @@ export const Steps = styled.div`
   display: flex;
   flex-direction: column;
   width: 600px;
+  @media (max-width: 800px) {
+    width: 90%;
+  }
 `
 
 export const DescriptionsGroup = styled.div`
@@ -76,11 +80,17 @@ export const ContentDescription = styled.div`
     margin-left: 12px;
     font-weight: 400;
     color: #c69244;
+    @media (max-width: 800px) {
+      margin-left: 4px;
+    }
   }
   h2.step2 {
     transition: 0.3s;
     margin-left: 12px;
     font-weight: 400;
+    @media (max-width: 800px) {
+      margin-left: 4px;
+    }
     color: ${(p: Props) =>
       p.statusStep == 2 || p.statusStep == 3 ? css`#C69244` : '#C4C4C4'};
   }
@@ -88,23 +98,37 @@ export const ContentDescription = styled.div`
     transition: 0.3s;
     margin-left: 12px;
     font-weight: 400;
+    @media (max-width: 800px) {
+      margin-left: 4px;
+    }
     color: ${(p: Props) => (p.statusStep == 3 ? css`#C69244` : '#C4C4C4')};
   }
 `
 
 export const ListIcon = styled(List)`
   color: #c69244;
+  @media (max-width: 800px) {
+    width: 20px;
+  }
 `
 
 export const VideoIcon = styled(Video)`
-  transition: 0.3s;
-  color: ${(p: Props) =>
-    p.statusStep == 2 || p.statusStep == 3 ? css`#C69244` : '#C4C4C4'};
+  && {
+    transition: 0.3s;
+    color: ${(p: Props) =>
+      p.statusStep == 2 || p.statusStep == 3 ? css`#C69244` : '#C4C4C4'};
+  }
+  @media (max-width: 800px) {
+    width: 20px;
+  }
 `
 
 export const CardIcon = styled(CreditCard)`
   transition: 0.3s;
   color: ${(p: Props) => (p.statusStep == 3 ? css`#C69244` : '#C4C4C4')};
+  @media (max-width: 800px) {
+    width: 20px;
+  }
 `
 
 export const ProgressSteps = styled.div`
@@ -143,6 +167,9 @@ export const Input = styled.input`
 
 export const Form = styled.div`
   width: 350px;
+  @media (max-width: 800px) {
+    width: 90%;
+  }
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -232,7 +259,16 @@ export const Tutorial = styled.div`
   justify-content: space-between;
   margin-bottom: 36px;
   margin-top: 10px;
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
   .groupStepTutorial {
+    @media (max-width: 800px) {
+      margin: 10px 0;
+      img {
+        width: 40px;
+      }
+    }
     display: flex;
     h2 {
       font-weight: 300;

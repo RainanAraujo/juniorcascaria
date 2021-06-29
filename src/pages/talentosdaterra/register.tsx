@@ -18,9 +18,9 @@ import {
   Button,
   Tutorial,
   ButtonGroup
-} from '../styles/pages/Register'
-import tutorialVideo1 from '../assets/tutorialVideo1.svg'
-import tutorialVideo3 from '../assets/tutorialVideo3.svg'
+} from '../../styles/pages/Register'
+import tutorialVideo1 from '../../assets/tutorialVideo1.svg'
+import tutorialVideo3 from '../../assets/tutorialVideo3.svg'
 const Register: React.FC = () => {
   const [statusStep, setStatusStep] = useState(1)
 
