@@ -8,18 +8,22 @@ import {
   WrapperOptions,
   Button
 } from '../styles/pages/Home'
-
+import logoCascaria from '../assets/logoCascaria.svg'
+import logoEvento from '../assets/logoEvento.svg'
 const Home: React.FC = () => {
   return (
     <Container>
-      <Header></Header>
+      <Header>
+        <img src={logoEvento} />
+        <img src={logoCascaria} />
+      </Header>
       <Content>
         <h1>
-          Página de apresentação
+          Plataforma
           <br />
-          <b>Em breve</b>
+          <b>Em Construção</b>
         </h1>
-        <WrapperOptions>
+        {/* <WrapperOptions>
           <div className="subscribeOpened">
             <h1>Inscrições abertas!</h1>
             <span>
@@ -42,9 +46,9 @@ const Home: React.FC = () => {
               <Button outlined>Emitir Comprovante</Button>
             </Link>
           </div>
-        </WrapperOptions>
+        </WrapperOptions> */}
       </Content>
-      <Footer>
+      {/* <Footer>
         <div>
           <span>© 2021 Todos os direitos reservados</span>
           <span>
@@ -60,7 +64,7 @@ const Home: React.FC = () => {
             </b>
           </span>
         </div>
-      </Footer>
+      </Footer> */}
     </Container>
   )
 }

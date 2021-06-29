@@ -151,7 +151,7 @@ const Register: React.FC = () => {
         </Steps>
         {statusStep == 1 && (
           <h1>
-            Adicione seus dados -{valideForm.toString()}-
+            Adicione seus dados
             <br />
             <b>Pessoais e Artísticos</b>
           </h1>

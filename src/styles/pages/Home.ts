@@ -9,12 +9,20 @@ export const Container = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
+  background-color: #d3c6a3;
 `
 
 export const Header = styled.div`
   height: 80px;
   max-width: 1280px;
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  img {
+    width: 80px;
+  }
 `
 export const Content = styled.div`
   max-width: 1280px;
@@ -31,6 +39,7 @@ export const Content = styled.div`
     text-align: center;
     line-height: 1.4;
     font-weight: 200;
+    color: #453404;
   }
 `
 export const Footer = styled.div`
@@ -58,6 +67,7 @@ export const WrapperOptions = styled.div`
     flex-direction: column;
   }
   h1 {
+    color: #453404;
     font-weight: 500;
     text-align: start;
     @media (max-width: 800px) {
@@ -65,7 +75,7 @@ export const WrapperOptions = styled.div`
     }
   }
   span {
-    color: #a0a0a0;
+    color: #fffbef;
     font-size: 1.2rem;
     line-height: 2rem;
     @media (max-width: 800px) {
@@ -109,7 +119,7 @@ export const Button = styled.button`
       ? css`
           background-color: transparent;
           border: #dcdcdc 2px solid;
-          color: #322f29;
+          color: #fff;
         `
       : css`
           color: #fff;
