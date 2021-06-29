@@ -1,15 +1,34 @@
-import styled, { css } from 'styled-components'
-
+import styled, { css, keyframes } from 'styled-components'
+import background from '../../assets/background.svg'
 interface Props {
   outlined?: boolean
 }
 
-export const Container = styled.div`
-  min-height: 100vh;
+const animateBg = keyframes` 
+0% { background-position: 0% 0%; }
+100% { background-position: 0% 100%; }`
+
+export const Background = styled.div`
+  width: 100%;
+  height: 100%;
+  background-image: url(${background});
+  background-size: cover;
+  background-repeat: no-repeat;
   align-items: center;
   display: flex;
   flex-direction: column;
-  background-color: #d3c6a3;
+  @media (max-width: 800px) {
+    background-position: center;
+  }
+`
+export const Container = styled.div`
+  height: 100vh;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  animation: ${animateBg} 5s alternate-reverse infinite;
+  background-image: linear-gradient(50deg, #c09b6f, #76543e, #c09b6f);
+  background-size: 100% 1100%;
 `
 
 export const Header = styled.div`
@@ -28,21 +47,34 @@ export const Content = styled.div`
   max-width: 1280px;
   width: 100%;
   min-height: 80vh;
-  height: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+  img {
+    @media (max-width: 800px) {
+      width: 70%;
+    }
 
+    width: 25%;
+  }
+  img.organization {
+    width: 100px;
+    animation: none;
+  }
   h1 {
-    font-size: 3.2rem;
+    font-size: 3.6rem;
     margin: 24px 0;
     text-align: center;
     line-height: 1.4;
     font-weight: 200;
-    color: #453404;
+    color: #f8f1df;
   }
 `
 export const Footer = styled.div`
+  @media (max-width: 800px) {
+    display: none;
+  }
   width: 100%;
   margin-top: 50px;
   background-color: #f8f8f8;

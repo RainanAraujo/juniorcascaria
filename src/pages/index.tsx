@@ -6,24 +6,25 @@ import {
   Content,
   Header,
   WrapperOptions,
-  Button
+  Button,
+  Background
 } from '../styles/pages/Home'
 import logoCascaria from '../assets/logoCascaria.svg'
 import logoEvento from '../assets/logoEvento.svg'
 const Home: React.FC = () => {
   return (
     <Container>
-      <Header>
-        <img src={logoEvento} />
-        <img src={logoCascaria} />
-      </Header>
-      <Content>
-        <h1>
-          Plataforma
-          <br />
-          <b>Em Construção</b>
-        </h1>
-        {/* <WrapperOptions>
+      <Background>
+        <Header></Header>
+        <Content>
+          <img src={logoEvento} />
+
+          <h1>
+            Inscrições
+            <b> 2 de Julho</b>
+          </h1>
+          <img src={logoCascaria} className="organization" />
+          {/* <WrapperOptions>
           <div className="subscribeOpened">
             <h1>Inscrições abertas!</h1>
             <span>
@@ -47,8 +48,8 @@ const Home: React.FC = () => {
             </Link>
           </div>
         </WrapperOptions> */}
-      </Content>
-      {/* <Footer>
+        </Content>
+        {/* <Footer>
         <div>
           <span>© 2021 Todos os direitos reservados</span>
           <span>
@@ -65,6 +66,7 @@ const Home: React.FC = () => {
           </span>
         </div>
       </Footer> */}
+      </Background>
     </Container>
   )
 }

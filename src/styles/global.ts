@@ -21,8 +21,10 @@ html {
 html,
 body,
 #root {
+ 
 }
 body {
+
   background-color: #FCFCFC;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;

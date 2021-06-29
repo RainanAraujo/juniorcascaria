@@ -20,6 +20,7 @@ import {
   ButtonGroup
 } from '../../styles/pages/Register'
 import tutorialVideo1 from '../../assets/tutorialVideo1.svg'
+import tutorialVideo2 from '../../assets/tutorialVideo2.svg'
 import tutorialVideo3 from '../../assets/tutorialVideo3.svg'
 
 import Autosuggest from 'react-autosuggest'
@@ -242,7 +243,7 @@ const Register: React.FC = () => {
                 </h2>
               </div>
               <div className="groupStepTutorial">
-                <img src={tutorialVideo3} />
+                <img src={tutorialVideo2} />
                 <h2>
                   O video deve iniciar com a <br /> frase “Video para o <br />
                   concurso talentos da terra”.
