@@ -12,6 +12,8 @@ const firebaseConfig = {
   measurementId: 'G-KVLS6P3LRJ'
 }
 
+console.log(firebaseConfig)
+
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
 } else {

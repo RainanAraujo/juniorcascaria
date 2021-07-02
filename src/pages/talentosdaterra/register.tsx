@@ -17,13 +17,15 @@ import {
   Form,
   Button,
   Tutorial,
-  ButtonGroup
+  ButtonGroup,
+  LoadingIcon,
+  SelectInput,
+  Step3
 } from '../../styles/pages/Register'
 import tutorialVideo1 from '../../assets/tutorialVideo1.svg'
 import tutorialVideo2 from '../../assets/tutorialVideo2.svg'
 import tutorialVideo3 from '../../assets/tutorialVideo3.svg'
-
-import Autosuggest from 'react-autosuggest'
+import logoEvento from '../../assets/logoEvento.svg'
 import cities from '../../assets/cities.json'
 import { registerCompetitor } from '../../../services/firestore'
 import firebase from '../../../services/firebase'
@@ -35,13 +37,36 @@ const Register: React.FC = () => {
   const [artisticName, setArtisticName] = useState('')
   const [CPF, setCPF] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
-  const [city, setCity] = useState('')
+  const [city, setCity] = useState({
+    value: '',
+    label: 'Selecionar Cidade'
+  } as Option)
   const [district, setDistrict] = useState('')
   const [addressNumber, setAddressNumber] = useState('')
   const [addressDetails, setAddressDetails] = useState('')
   const [videoURL, setVideoURL] = useState('')
+  const [isLoading, setLoading] = useState(false)
 
-  const [suggestions, setSuggestions] = useState([] as string[])
+  interface Option {
+    value: string
+    label: string
+  }
+
+  function cpfMask(value: string) {
+    return value
+      .replace(/\D/g, '')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+      .replace(/(-\d{2})\d+?$/, '$1')
+  }
+
+  function telMask(value: string) {
+    return value
+      .replace(/\D/g, '')
+      .replace(/^(\d{2})(\d)/g, '($1) $2')
+      .replace(/(\d)(\d{4})$/, '$1-$2')
+  }
 
   function validURL(str: string) {
     const pattern = new RegExp(
@@ -56,7 +81,8 @@ const Register: React.FC = () => {
     return !!pattern.test(str)
   }
 
-  function validateCpf(inputCPF: string) {
+  function validateCpf(inputCPF: string): boolean {
+    inputCPF = inputCPF.replace(/-/g, '').replace(/\./g, '')
     let soma = 0
     let resto
 
@@ -85,7 +111,7 @@ const Register: React.FC = () => {
         artisticName,
         CPF,
         phoneNumber,
-        city,
+        city.value,
         district,
         addressNumber,
         addressDetails
@@ -106,24 +132,6 @@ const Register: React.FC = () => {
     addressNumber,
     addressDetails
   ])
-
-  function onSuggestionsFetchRequested({ value }: any) {
-    const inputValue = value.trim().toLowerCase()
-    const inputLength = inputValue.length
-
-    const suggestion =
-      inputLength === 0
-        ? ([] as string[])
-        : cities
-            .filter(
-              city => city.toLowerCase().slice(0, inputLength) === inputValue
-            )
-            .slice(0, 5)
-
-    setSuggestions(suggestion)
-  }
-
-  const renderSuggestion = (suggestion: any) => <div>{suggestion}</div>
 
   return (
     <Container>
@@ -179,37 +187,43 @@ const Register: React.FC = () => {
             <label>Nome Completo</label>
             <Input
               value={fullName}
+              placeholder="Digite seu nome completo"
               onChange={evt => setFullName(evt.target.value)}
             />
             <label>Nome Artístico</label>
             <Input
               value={artisticName}
+              placeholder="Digite seu nome artístico"
               onChange={evt => setArtisticName(evt.target.value)}
             />
             <label>CPF</label>
-            <Input value={CPF} onChange={evt => setCPF(evt.target.value)} />
+            <Input
+              placeholder="000.000.000-00"
+              value={cpfMask(CPF)}
+              type="text"
+              error={CPF.length >= 1 ? validateCpf(CPF) : true}
+              onChange={evt => setCPF(evt.target.value)}
+              maxLength={14}
+            />
             <label>Telefone (Whatsapp)</label>
             <Input
-              value={phoneNumber}
+              placeholder="(00) 0 0000-0000"
+              value={telMask(phoneNumber)}
               onChange={evt => setPhoneNumber(evt.target.value)}
+              maxLength={15}
             />
             <label>Cidade</label>
-            <Autosuggest
-              suggestions={suggestions}
-              onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-              onSuggestionsClearRequested={() => setSuggestions([])}
-              getSuggestionValue={suggestion => suggestion}
-              renderSuggestion={renderSuggestion}
-              inputProps={{
-                placeholder: 'Digite sua Cidade',
-                value: city,
-                onChange: (evt: any, value: any) => setCity(value.newValue)
-              }}
+            <SelectInput
+              options={cities}
+              value={city}
+              onChange={(newValue: any) => setCity(newValue)}
             />
+
             <div className="address">
               <div className="groupDistrict">
                 <label>Bairro</label>
                 <Input
+                  placeholder="Digite seu bairro"
                   value={district}
                   onChange={evt => setDistrict(evt.target.value)}
                 />
@@ -217,6 +231,7 @@ const Register: React.FC = () => {
               <div className="groupNumber">
                 <label>Número</label>
                 <Input
+                  placeholder="00"
                   value={addressNumber}
                   onChange={evt => setAddressNumber(evt.target.value)}
                 />
@@ -224,6 +239,7 @@ const Register: React.FC = () => {
             </div>
             <label>Complemento</label>
             <Input
+              placeholder="Digite o complemento"
               value={addressDetails}
               onChange={evt => setAddressDetails(evt.target.value)}
             />
@@ -251,7 +267,7 @@ const Register: React.FC = () => {
               </div>
               <div className="groupStepTutorial">
                 <img src={tutorialVideo3} />
-                <h2>Publique seu video no seu Instagram.</h2>
+                <h2>Publique o video no seu Instagram.</h2>
               </div>
             </Tutorial>
             <Form>
@@ -260,8 +276,10 @@ const Register: React.FC = () => {
               </label>
               <Input
                 value={videoURL}
+                placeholder="Insira um link"
                 onChange={evt => setVideoURL(evt.target.value)}
               />
+
               <ButtonGroup>
                 <Button outlined={true} onClick={() => setStatusStep(1)}>
                   Voltar
@@ -270,28 +288,45 @@ const Register: React.FC = () => {
                 <Button
                   disabled={!validURL(videoURL)}
                   onClick={async () => {
+                    setLoading(true)
                     firebase.auth().signInAnonymously()
                     await registerCompetitor(
                       fullName,
                       artisticName,
-                      CPF,
+                      CPF.replace(/-/g, '').replace(/\./g, ''),
                       phoneNumber,
                       videoURL,
                       {
-                        city,
+                        city: city.value,
                         district,
                         addressNumber,
                         details: addressDetails
                       }
                     )
+                    setLoading(false)
                     setStatusStep(3)
                   }}
                 >
-                  Finalizar
+                  {isLoading ? <LoadingIcon size={20} /> : 'Finalizar'}
                 </Button>
               </ButtonGroup>
             </Form>
           </>
+        )}
+        {statusStep === 3 && (
+          <Step3>
+            <img src={logoEvento} />
+            <div className="finishedSubscribe">INSCRIÇÃO FINALIZADA</div>
+            <h3>
+              Parabens! <br /> <b>{fullName}</b> <br /> está inscrito no
+              concurso <br />
+              Talentos da Terra!
+            </h3>
+            <span>
+              Sua inscrição está em análise.
+              <br /> Aguarde e entraremos em contato!
+            </span>
+          </Step3>
         )}
       </Content>
 

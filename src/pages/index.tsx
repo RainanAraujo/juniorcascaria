@@ -5,51 +5,49 @@ import {
   Footer,
   Content,
   Header,
-  WrapperOptions,
   Button,
-  Background
+  ContentMain,
+  WrapperContentMain,
+  Description,
+  Graphics,
+  ContentSecond,
+  BackgroundContentMain
 } from '../styles/pages/Home'
 import logoCascaria from '../assets/logoCascaria.svg'
 import logoEvento from '../assets/logoEvento.svg'
-const Home: React.FC = () => {
+import stage from '../assets/stage.svg'
+const Home2: React.FC = () => {
   return (
     <Container>
-      <Background>
-        <Header></Header>
-        <Content>
-          <img src={logoEvento} />
-
-          <h1>
-            Inscrições
-            <b> 2 de Julho</b>
-          </h1>
-          <img src={logoCascaria} className="organization" />
-          {/* <WrapperOptions>
-          <div className="subscribeOpened">
-            <h1>Inscrições abertas!</h1>
-            <span>
-              As inscrições do concurso <b>Talentos da Terra</b> ja esta
-              disponível e estarão abertas até <b>18 de julho</b>. Clique no
-              botão abaixo para inscrever-se.
-            </span>
-            <Link href="/talentosdaterra/register">
-              <Button>Inscreva-se</Button>
-            </Link>
-          </div>
-          <div className="divider"></div>
-          <div className="subscribeCheck">
-            <h1>Ja é inscrito?</h1>
-            <span>
-              Se você ja se inscreveu no nosso evento, clique no botão abaixo
-              para acessar o comprovante de inscrição.
-            </span>
-            <Link href="/talentosdaterra/registrationVoucher">
-              <Button outlined>Emitir Comprovante</Button>
-            </Link>
-          </div>
-        </WrapperOptions> */}
-        </Content>
-        {/* <Footer>
+      <Header>
+        <img src={logoCascaria} />
+      </Header>
+      <Content>
+        <ContentMain>
+          <BackgroundContentMain>
+            <WrapperContentMain>
+              <Description>
+                <h1>Participe do maior concurso musical do ano!</h1>
+                <span>
+                  As inscrições do concurso <b>Talentos da Terra</b> ja estão
+                  disponíveis. Clique no botão abaixo e participe!
+                </span>
+                <Link href="/talentosdaterra/register">
+                  <Button>Quero Participar</Button>
+                </Link>
+              </Description>
+              <Graphics>
+                <img src={logoEvento} className="logo" />
+                <img src={stage} className="stage" />
+              </Graphics>
+            </WrapperContentMain>
+          </BackgroundContentMain>
+        </ContentMain>
+        <ContentSecond>
+          <div className="wrapper"></div>
+        </ContentSecond>
+      </Content>
+      <Footer>
         <div>
           <span>© 2021 Todos os direitos reservados</span>
           <span>
@@ -60,15 +58,14 @@ const Home: React.FC = () => {
                   window.open('https://www.instagram.com/keracomunicacao/')
                 }
               >
-                KERA
+                @keracomunicacao
               </a>{' '}
             </b>
           </span>
         </div>
-      </Footer> */}
-      </Background>
+      </Footer>
     </Container>
   )
 }
 
-export default Home
+export default Home2

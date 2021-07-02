@@ -1,39 +1,22 @@
 import styled, { css, keyframes } from 'styled-components'
-import background from '../../assets/background.svg'
+import backgroundContentMain from '../../assets/backgroundContentMain.svg'
+
 interface Props {
   outlined?: boolean
 }
 
-const animateBg = keyframes` 
-0% { background-position: 0% 0%; }
-100% { background-position: 0% 100%; }`
-
-export const Background = styled.div`
-  width: 100%;
-  height: 100%;
-  background-image: url(${background});
-  background-size: cover;
-  background-repeat: no-repeat;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  @media (max-width: 800px) {
-    background-position: center;
-  }
-`
 export const Container = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   align-items: center;
   display: flex;
   flex-direction: column;
-  animation: ${animateBg} 5s alternate-reverse infinite;
-  background-image: linear-gradient(50deg, #c09b6f, #76543e, #c09b6f);
-  background-size: 100% 1100%;
+  background-color: #1b1a18;
 `
 
 export const Header = styled.div`
   height: 80px;
-  max-width: 1280px;
+  max-width: 1080px;
+  padding: 0 30px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -43,11 +26,36 @@ export const Header = styled.div`
     width: 80px;
   }
 `
+
+export const ContentMain = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
+
+export const BackgroundContentMain = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(${backgroundContentMain});
+`
+
+export const WrapperContentMain = styled.div`
+  max-width: 1080px;
+  padding: 0 30px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  @media (max-width: 800px) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+`
+
 export const Content = styled.div`
-  max-width: 1280px;
   width: 100%;
   min-height: 80vh;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -72,79 +80,93 @@ export const Content = styled.div`
   }
 `
 export const Footer = styled.div`
-  @media (max-width: 800px) {
-    display: none;
-  }
   width: 100%;
   margin-top: 50px;
-  background-color: #f8f8f8;
+  background-color: #e0d394;
   div {
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 20px;
-    max-width: 1280px;
+    max-width: 1080px;
     width: 100%;
   }
   a {
     cursor: pointer;
   }
 `
-export const WrapperOptions = styled.div`
+export const Description = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 60px 0;
   @media (max-width: 800px) {
     flex-direction: column;
+    padding: 20px 0;
   }
   h1 {
-    color: #453404;
-    font-weight: 500;
+    color: #fffad1;
+    font-weight: 900;
     text-align: start;
+    line-height: 4.6rem;
+    font-size: 4rem;
     @media (max-width: 800px) {
       text-align: center;
+      font-size: 3.6rem;
     }
   }
   span {
     color: #fffbef;
-    font-size: 1.2rem;
-    line-height: 2rem;
+    font-size: 1.4rem;
+    line-height: 2.3rem;
+    font-weight: 400;
     @media (max-width: 800px) {
       text-align: center;
     }
   }
-  .divider {
-    height: 150px;
-    width: 2px;
-    background-color: #ebebeb;
-    margin: 0 30px;
-    @media (max-width: 800px) {
-      display: none;
-    }
+`
+
+export const Graphics = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 100px;
+
+  .logo {
+    width: 350px;
+    margin-right: 50px;
   }
-  .subscribeOpened,
-  .subscribeCheck {
-    display: grid;
-    grid-template-rows: 1fr 1fr auto;
-    @media (max-width: 800px) {
-      width: 80%;
-      grid-template-rows: 1fr 0.8fr auto;
+  .stage {
+    width: 570px;
+    margin-top: 20px;
+    position: relative;
+    z-index: 999;
+  }
+  @media (max-width: 800px) {
+    margin-left: 0;
+    justify-content: center;
+    .logo {
+      width: 200px;
+      margin-right: 0;
     }
-    width: 400px;
+    .stage {
+      width: 270px;
+    }
   }
 `
+
 export const Button = styled.button`
   padding: 16px 32px;
   font-weight: 500;
   width: 200px;
   border-radius: 5px;
-  margin-top: 12px;
+  margin-top: 20px;
   transition: 0.3s;
   cursor: pointer;
   @media (max-width: 800px) {
     width: 100%;
-    margin-top: 0;
+    margin-top: 20px;
   }
   ${(p: Props) =>
     p.outlined
@@ -152,13 +174,27 @@ export const Button = styled.button`
           background-color: transparent;
           border: #dcdcdc 2px solid;
           color: #fff;
+
+          margin-top: 0;
         `
       : css`
-          color: #fff;
-          background-color: #dd901d;
+          color: #000;
+          background-color: #fffad1;
           border: none;
           :hover {
             background-color: #f6b24c;
           }
         `};
+`
+
+export const ContentSecond = styled.div`
+  background-color: #fffae2;
+  @media (max-width: 800px) {
+    display: none;
+  }
+  width: 100%;
+  height: 100px;
+  margin: -60px;
+  .wrapper {
+  }
 `
