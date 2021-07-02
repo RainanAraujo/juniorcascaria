@@ -41,9 +41,6 @@ export const Content = styled.div`
 `
 
 export const Footer = styled.div`
-  @media (max-width: 800px) {
-    display: none;
-  }
   width: 100%;
   margin-top: 50px;
   background-color: #f8f8f8;
