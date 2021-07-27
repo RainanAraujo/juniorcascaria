@@ -26,7 +26,7 @@ import tutorialVideo1 from '../../assets/tutorialVideo1.svg'
 import tutorialVideo2 from '../../assets/tutorialVideo2.svg'
 import tutorialVideo3 from '../../assets/tutorialVideo3.svg'
 import logoEvento from '../../assets/logoEvento.svg'
-import cities from '../../assets/cities.json'
+import cities from '../cities.json'
 import { registerCompetitor } from '../../../services/firestore'
 import firebase from '../../../services/firebase'
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import {
   Container,
@@ -16,9 +16,18 @@ import {
 import logoCascaria from '../assets/logoCascaria.svg'
 import logoEvento from '../assets/logoEvento.svg'
 import stage from '../assets/stage.svg'
+import schedule from '../assets/schedule.svg'
+import PopUpImage from '../styles/components/PopUpImage'
+
 const Home2: React.FC = () => {
+  const [schedulePopUp, setSchedulePopUp] = useState(false)
+
   return (
     <Container>
+      {schedulePopUp && (
+        <PopUpImage image={schedule} onClose={() => setSchedulePopUp(false)} />
+      )}
+
       <Header>
         <img src={logoCascaria} />
       </Header>
@@ -27,14 +36,15 @@ const Home2: React.FC = () => {
           <BackgroundContentMain>
             <WrapperContentMain>
               <Description>
-                <h1>Participe do maior concurso musical do ano!</h1>
+                <h1>Vem ai, o maior concurso musical do ano!</h1>
                 <span>
-                  As inscrições do concurso <b>Talentos da Terra</b> ja estão
-                  disponíveis. Clique no botão abaixo e participe!
+                  A lista dos inscritos e o resultado dos 12 selecionados
+                  estarão disponíveis em breve! Confira nosso cronograma.
                 </span>
-                <Link href="/talentosdaterra/register">
-                  <Button>Quero Participar</Button>
-                </Link>
+
+                <Button onClick={() => setSchedulePopUp(true)}>
+                  Cronograma
+                </Button>
               </Description>
               <Graphics>
                 <img src={logoEvento} className="logo" />

@@ -5,12 +5,26 @@ interface Props {
   outlined?: boolean
 }
 
+const backgroundAnim = keyframes`
+  0%{
+    background-position:0% 96%
+  }
+  50%{
+    background-position:100% 5%
+  }
+  100%{
+    background-position:0% 96%
+  }
+`
+
 export const Container = styled.div`
   min-height: 100vh;
   align-items: center;
   display: flex;
   flex-direction: column;
-  background-color: #1b1a18;
+  background: linear-gradient(46deg, #3d2515, #1b1a18, #e0d394);
+  background-size: 600% 600%;
+  animation: ${backgroundAnim} 13s ease infinite;
 `
 
 export const Header = styled.div`
@@ -109,7 +123,7 @@ export const Description = styled.div`
     color: #fffad1;
     font-weight: 900;
     text-align: start;
-    line-height: 4.6rem;
+    line-height: 4.4rem;
     font-size: 4rem;
     @media (max-width: 800px) {
       text-align: center;
@@ -141,7 +155,7 @@ export const Graphics = styled.div`
     width: 570px;
     margin-top: 20px;
     position: relative;
-    z-index: 999;
+    z-index: 2;
   }
   @media (max-width: 800px) {
     margin-left: 0;
