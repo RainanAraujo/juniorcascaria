@@ -267,7 +267,7 @@ const Register: React.FC = () => {
               </div>
               <div className="groupStepTutorial">
                 <img src={tutorialVideo3} />
-                <h2>Publique o video no seu Instagram.</h2>
+                <h2>Publique o video no feed do seu Instagram.</h2>
               </div>
             </Tutorial>
             <Form>
