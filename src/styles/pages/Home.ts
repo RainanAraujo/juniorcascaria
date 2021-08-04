@@ -211,12 +211,48 @@ export const ButtonGroup = styled.div`
 
 export const ContentSecond = styled.div`
   background-color: #fffae2;
-  @media (max-width: 800px) {
-    display: none;
-  }
+  padding: 40px 0;
   width: 100%;
-  height: 100px;
   margin: -60px;
+  @media (max-width: 800px) {
+    margin: 0;
+    padding: 16px;
+  }
+
+  h1 {
+    color: #3d2515;
+    font-weight: 900;
+    text-align: start;
+    line-height: 4.4rem;
+    font-size: 3rem;
+    @media (max-width: 800px) {
+      text-align: center;
+      font-size: 3.6rem;
+    }
+  }
   .wrapper {
+    align-items: center;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .logoSponsorship {
+    align-items: center;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: row;
+    background-color: #fff;
+    @media (max-width: 800px) {
+      flex-direction: column;
+    }
+    img {
+      width: 200px;
+      margin: 0 12px;
+    }
+    #dalcotone {
+      margin: 62px 0;
+    }
   }
 `

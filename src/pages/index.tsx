@@ -16,8 +16,12 @@ import {
 } from '../styles/pages/Home'
 import logoCascaria from '../assets/logoCascaria.svg'
 import logoEvento from '../assets/logoEvento.svg'
+import recicle from '../assets/recicle.svg'
+import imped from '../assets/imped.svg'
 import stage from '../assets/stage.svg'
 import schedule from '../assets/schedule.svg'
+import dalcotone from '../assets/dalcotone.svg'
+import posto from '../assets/posto.svg'
 import PopUpImage from '../styles/components/PopUpImage'
 
 const Home2: React.FC = () => {
@@ -40,7 +44,8 @@ const Home2: React.FC = () => {
                 <h1>Vem ai, o maior concurso musical do ano!</h1>
                 <span>
                   A lista dos inscritos e o resultado dos 12 selecionados
-                  estarão disponíveis em breve! Confira nosso cronograma.
+                  estarão disponíveis em breve! Confira a lista de todos
+                  deferidos.
                 </span>
                 <ButtonGroup>
                   <Button
@@ -68,7 +73,15 @@ const Home2: React.FC = () => {
           </BackgroundContentMain>
         </ContentMain>
         <ContentSecond>
-          <div className="wrapper"></div>
+          <div className="wrapper">
+            <h1>Apoio</h1>
+            <div className="logoSponsorship">
+              <img src={recicle} />
+              <img src={imped} />
+              <img src={dalcotone} />
+              <img src={posto} id="dalcotone" />
+            </div>
+          </div>
         </ContentSecond>
       </Content>
       <Footer>
