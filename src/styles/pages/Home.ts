@@ -173,14 +173,16 @@ export const Graphics = styled.div`
 export const Button = styled.button`
   padding: 16px 32px;
   font-weight: 500;
-  width: 200px;
   border-radius: 5px;
   margin-top: 20px;
+  margin-right: 12px;
   transition: 0.3s;
   cursor: pointer;
   @media (max-width: 800px) {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 14x;
+    padding: 24px 32px;
+    font-size: 16px;
   }
   ${(p: Props) =>
     p.outlined
@@ -188,8 +190,6 @@ export const Button = styled.button`
           background-color: transparent;
           border: #dcdcdc 2px solid;
           color: #fff;
-
-          margin-top: 0;
         `
       : css`
           color: #000;
@@ -199,6 +199,14 @@ export const Button = styled.button`
             background-color: #f6b24c;
           }
         `};
+`
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  width: 100%;
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 `
 
 export const ContentSecond = styled.div`

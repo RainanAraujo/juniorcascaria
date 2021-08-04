@@ -11,7 +11,8 @@ import {
   Description,
   Graphics,
   ContentSecond,
-  BackgroundContentMain
+  BackgroundContentMain,
+  ButtonGroup
 } from '../styles/pages/Home'
 import logoCascaria from '../assets/logoCascaria.svg'
 import logoEvento from '../assets/logoEvento.svg'
@@ -41,10 +42,21 @@ const Home2: React.FC = () => {
                   A lista dos inscritos e o resultado dos 12 selecionados
                   estarão disponíveis em breve! Confira nosso cronograma.
                 </span>
-
-                <Button onClick={() => setSchedulePopUp(true)}>
-                  Cronograma
-                </Button>
+                <ButtonGroup>
+                  <Button onClick={() => setSchedulePopUp(true)}>
+                    Cronograma
+                  </Button>
+                  <Button
+                    onClick={() =>
+                      window.open(
+                        'https://firebasestorage.googleapis.com/v0/b/juniorcascaria-4fba1.appspot.com/o/LISTA%20DE%20DEFERIDOS%20TALENTOS%20DA%20TERRA.pdf?alt=media&token=49d0064c-b5e9-45a5-865c-36b11b6b72b9'
+                      )
+                    }
+                    outlined={true}
+                  >
+                    Lista de inscritos
+                  </Button>
+                </ButtonGroup>
               </Description>
               <Graphics>
                 <img src={logoEvento} className="logo" />
