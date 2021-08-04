@@ -22,6 +22,7 @@ import stage from '../assets/stage.svg'
 import schedule from '../assets/schedule.svg'
 import dalcotone from '../assets/dalcotone.svg'
 import posto from '../assets/posto.svg'
+import surpCorreao from '../assets/surpCorreao.svg'
 import PopUpImage from '../styles/components/PopUpImage'
 
 const Home2: React.FC = () => {
@@ -80,6 +81,7 @@ const Home2: React.FC = () => {
               <img src={imped} />
               <img src={dalcotone} />
               <img src={posto} id="dalcotone" />
+              <img src={surpCorreao} />
             </div>
           </div>
         </ContentSecond>
