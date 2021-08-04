@@ -43,18 +43,20 @@ const Home2: React.FC = () => {
                   estarão disponíveis em breve! Confira nosso cronograma.
                 </span>
                 <ButtonGroup>
-                  <Button onClick={() => setSchedulePopUp(true)}>
-                    Cronograma
-                  </Button>
                   <Button
                     onClick={() =>
                       window.open(
                         'https://firebasestorage.googleapis.com/v0/b/juniorcascaria-4fba1.appspot.com/o/LISTA%20DE%20DEFERIDOS%20TALENTOS%20DA%20TERRA.pdf?alt=media&token=49d0064c-b5e9-45a5-865c-36b11b6b72b9'
                       )
                     }
-                    outlined={true}
                   >
                     Lista de inscritos
+                  </Button>
+                  <Button
+                    onClick={() => setSchedulePopUp(true)}
+                    outlined={true}
+                  >
+                    Cronograma
                   </Button>
                 </ButtonGroup>
               </Description>
