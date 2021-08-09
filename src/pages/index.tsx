@@ -22,16 +22,20 @@ import stage from '../assets/stage.svg'
 import schedule from '../assets/schedule.svg'
 import dalcotone from '../assets/dalcotone.svg'
 import posto from '../assets/posto.svg'
+import selecteds from '../assets/selecteds.svg'
 import surpCorreao from '../assets/surpCorreao.svg'
 import PopUpImage from '../styles/components/PopUpImage'
 
 const Home2: React.FC = () => {
   const [schedulePopUp, setSchedulePopUp] = useState(false)
-
+  const [selectedPopUp, setSelectedPopUp] = useState(false)
   return (
     <Container>
       {schedulePopUp && (
         <PopUpImage image={schedule} onClose={() => setSchedulePopUp(false)} />
+      )}
+      {selectedPopUp && (
+        <PopUpImage image={selecteds} onClose={() => setSelectedPopUp(false)} />
       )}
 
       <Header>
@@ -49,14 +53,8 @@ const Home2: React.FC = () => {
                   deferidos.
                 </span>
                 <ButtonGroup>
-                  <Button
-                    onClick={() =>
-                      window.open(
-                        'https://firebasestorage.googleapis.com/v0/b/juniorcascaria-4fba1.appspot.com/o/LISTA%20DE%20DEFERIDOS%20TALENTOS%20DA%20TERRA.pdf?alt=media&token=49d0064c-b5e9-45a5-865c-36b11b6b72b9'
-                      )
-                    }
-                  >
-                    Lista de inscritos
+                  <Button onClick={() => setSelectedPopUp(true)}>
+                    Selecionados
                   </Button>
                   <Button
                     onClick={() => setSchedulePopUp(true)}

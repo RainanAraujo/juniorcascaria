@@ -14,6 +14,7 @@ export const Container = styled.div`
   justify-content: center;
   position: fixed;
   z-index: 5;
+
   background-color: #00000050;
 `
 
@@ -23,10 +24,11 @@ export const Content = styled.div`
   border-radius: 10px;
   margin: auto;
   background-color: #fff;
-  width: 30%;
 
+  height: 90%;
   @media (max-width: 800px) {
-    width: 80%;
+    width: 90%;
+    height: auto;
   }
   img {
     border-radius: 10px;
