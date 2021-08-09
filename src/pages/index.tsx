@@ -48,9 +48,9 @@ const Home2: React.FC = () => {
               <Description>
                 <h1>Vem ai, o maior concurso musical do ano!</h1>
                 <span>
-                  A lista dos inscritos e o resultado dos 12 selecionados
-                  estarão disponíveis em breve! Confira a lista de todos
-                  deferidos.
+                  Já estão disponíves a lista dos 12 classificados! Dia 26 de
+                  outubro é nossa grande live. Venha prestigiar os talentos da
+                  nossa terra!
                 </span>
                 <ButtonGroup>
                   <Button onClick={() => setSelectedPopUp(true)}>
