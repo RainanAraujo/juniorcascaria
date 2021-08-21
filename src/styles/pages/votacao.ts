@@ -1,7 +1,8 @@
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
 interface Props {
   outlined?: boolean
+  selected?: boolean
 }
 export const Container = styled.div`
   min-height: 100vh;
@@ -11,9 +12,17 @@ export const Container = styled.div`
 `
 
 export const Header = styled.div`
-  height: 80px;
-  max-width: 1280px;
+  height: 150px;
+  max-width: 1080px;
+  padding: 0 30px;
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 150px;
+  }
 `
 
 export const Content = styled.div`
@@ -45,6 +54,7 @@ export const Content = styled.div`
     width: 400px;
     @media (max-width: 800px) {
       width: 100%;
+      font-size: 1.4rem;
     }
   }
   .form {
@@ -125,12 +135,13 @@ export const ParticipantsContainer = styled.div`
 export const ButtonParticipant = styled.button`
   border-radius: 10px;
   border: 1px #dfdbdb solid;
-  background-color: transparent;
+  background-color: ${(p: Props) => (p.selected ? '#E0D394' : '#fff')};
   cursor: pointer;
-  padding: 18px;
+  padding: 12px 20px;
   display: flex;
+  transition: 0.3s;
   align-items: center;
-
+  justify-content: space-between;
   .description {
     align-items: flex-start;
     display: flex;
@@ -146,18 +157,40 @@ export const ButtonParticipant = styled.button`
     font-size: 12px;
   }
   img {
+    height: 90px;
+  }
+  ${(p: Props) =>
+    !p.selected &&
+    css`
+      &:hover {
+        transition: 0.3s;
+        background-color: #fffcee;
+      }
+    `};
+`
+
+const showPopUpVoting = keyframes`
+  from {
+    transform: translateY(400px);
+  }
+
+  to {
+    transform: translateY(0px);
   }
 `
 
 export const PopUpVoting = styled.div`
   position: fixed;
-  bottom: 100px;
+  animation: ${showPopUpVoting} 0.3s linear;
+  bottom: 20px;
+
   background-color: #fff;
   border-radius: 10px;
   padding: 22px;
   width: 400px;
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.12);
   transition: 0.3s;
