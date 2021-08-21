@@ -56,7 +56,7 @@ const Votacao: React.FC = () => {
   ]
 
   async function submit(token: string) {
-    if (selectedCompetitor >= -1 && token) {
+    if (selectedCompetitor >= -1 && token.length > 0) {
       const rawResponse = await fetch(REGISTER_VOTE_URL, {
         method: 'POST',
         headers: {
@@ -105,7 +105,7 @@ const Votacao: React.FC = () => {
             return (
               <ButtonParticipant
                 key={index}
-                selected={selectedCompetitor == index}
+                selected={selectedCompetitor === index}
                 onClick={() => setSelectedCompetitor(index)}
               >
                 <div className="description">
@@ -121,7 +121,11 @@ const Votacao: React.FC = () => {
       {selectedCompetitor >= 0 && (
         <PopUpVoting>
           <p>Precisamos verificar que você não é um robô</p>
-          <ReCAPTCHA sitekey={PUBLIC_KEY} onChange={submit} size="compact" />
+          <ReCAPTCHA
+            sitekey={PUBLIC_KEY}
+            onChange={token => submit(token || '')}
+            size="compact"
+          />
           {/* <button onClick={submit}>SUBMIT</button> */}
         </PopUpVoting>
       )}
