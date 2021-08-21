@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import {
   Container,
@@ -9,7 +9,6 @@ import {
   ButtonParticipant,
   PopUpVoting
 } from '../../styles/pages/votacao'
-
 import adoniran from '../../assets/adoniran.svg'
 import adryanSilva from '../../assets/adryanSilva.svg'
 import breno from '../../assets/breno.svg'
@@ -23,9 +22,11 @@ import jessica from '../../assets/jessica.svg'
 import rayanne from '../../assets/rayanne.svg'
 import rony from '../../assets/rony.svg'
 import logoCascaria from '../../assets/logoCascaria.svg'
+
 const Votacao: React.FC = () => {
-  const [token, setToken] = useState()
-  const [selectedCompetitor, setSelectedCompetitor] = useState('')
+  const [selectedCompetitor, setSelectedCompetitor] = useState(-1)
+  const REGISTER_VOTE_URL =
+    'https://us-central1-juniorcascaria-4fba1.cloudfunctions.net/registerVote'
   const PUBLIC_KEY = '6Lfvx2AbAAAAAEsb-asgEwig6gRye5T7IdFCPIny'
   const candidates = [
     { name: 'Adoniran Judson', city: 'Codó', avatar: adoniran },
@@ -54,22 +55,17 @@ const Votacao: React.FC = () => {
     { name: 'Ronny Oliveira', city: 'Igarapé Grande', avatar: rony }
   ]
 
-  function onChange(value: any) {
-    setToken(value)
-    console.log('Captcha value:', value)
-  }
-
-  async function submit() {
-    console.log(selectedCompetitor, token)
-    if (selectedCompetitor != null && token != null) {
-      const rawResponse = await fetch(location.origin + '/api/vote', {
+  async function submit(token: string) {
+    if (selectedCompetitor >= -1 && token) {
+      const rawResponse = await fetch(REGISTER_VOTE_URL, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          competitorID: selectedCompetitor,
+          candidate: selectedCompetitor,
+          voterID: getVoterID(),
           recaptchaToken: token
         })
       })
@@ -78,6 +74,17 @@ const Votacao: React.FC = () => {
     } else {
       alert('invalid request')
     }
+  }
+
+  const getVoterID = () => {
+    let voterID = localStorage.getItem('voterID')
+    if (!voterID) {
+      voterID =
+        Math.random().toString(36).substring(2, 15) +
+        Math.random().toString(36).substring(2, 15)
+      localStorage.setItem('voterID', voterID)
+    }
+    return voterID
   }
 
   return (
@@ -98,8 +105,8 @@ const Votacao: React.FC = () => {
             return (
               <ButtonParticipant
                 key={index}
-                selected={selectedCompetitor === item.name}
-                onClick={() => setSelectedCompetitor(item.name)}
+                selected={selectedCompetitor == index}
+                onClick={() => setSelectedCompetitor(index)}
               >
                 <div className="description">
                   <h2>{item.name}</h2>
@@ -111,10 +118,10 @@ const Votacao: React.FC = () => {
           })}
         </ParticipantsContainer>
       </Content>
-      {selectedCompetitor !== '' && (
+      {selectedCompetitor >= 0 && (
         <PopUpVoting>
           <p>Precisamos verificar que você não é um robô</p>
-          <ReCAPTCHA sitekey={PUBLIC_KEY} onChange={onChange} size="compact" />
+          <ReCAPTCHA sitekey={PUBLIC_KEY} onChange={submit} size="compact" />
           {/* <button onClick={submit}>SUBMIT</button> */}
         </PopUpVoting>
       )}
