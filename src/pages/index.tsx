@@ -75,7 +75,7 @@ const Home2: React.FC = () => {
           <div className="wrapper">
             <h1>Apoio</h1>
             <div className="logoSponsorship">
-              <img src={recicle} />
+     
               <img src={imped} />
               <img src={dalcotone} />
               <img src={posto} id="dalcotone" />
