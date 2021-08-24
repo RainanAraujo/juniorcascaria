@@ -20,7 +20,7 @@ import recicle from '../assets/recicle.svg'
 import imped from '../assets/imped.svg'
 import stage from '../assets/stage.svg'
 import schedule from '../assets/schedule.svg'
-import dalcotone from '../assets/dalcotone.svg'
+import alencarNet from '../assets/alencarNet.svg'
 import posto from '../assets/posto.svg'
 import selecteds from '../assets/selecteds.svg'
 import surpCorreao from '../assets/surpCorreao.svg'
@@ -75,9 +75,8 @@ const Home2: React.FC = () => {
           <div className="wrapper">
             <h1>Apoio</h1>
             <div className="logoSponsorship">
-     
               <img src={imped} />
-              <img src={dalcotone} />
+              <img src={alencarNet} />
               <img src={posto} id="dalcotone" />
               <img src={surpCorreao} />
             </div>

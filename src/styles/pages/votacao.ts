@@ -28,7 +28,9 @@ export const Header = styled.div`
 export const Content = styled.div`
   @media (max-width: 800px) {
     width: 90%;
+    margin-bottom: 100px;
   }
+
   max-width: 1280px;
   width: 100%;
   min-height: 75vh;
@@ -68,6 +70,22 @@ export const Content = styled.div`
       font-weight: 700;
       margin-bottom: 8px;
     }
+  }
+`
+export const ContentVoteAgain = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 400px;
+
+  h3 {
+    font-size: 1.6rem;
+    margin-top: 6px;
+    color: #3a8019;
+    text-align: center;
+  }
+  @media (max-width: 800px) {
+    width: 90%;
   }
 `
 
@@ -183,7 +201,6 @@ export const PopUpVoting = styled.div`
   position: fixed;
   animation: ${showPopUpVoting} 0.3s linear;
   bottom: 20px;
-
   background-color: #fff;
   border-radius: 10px;
   padding: 22px;
@@ -194,16 +211,32 @@ export const PopUpVoting = styled.div`
   flex-direction: column;
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.12);
   transition: 0.3s;
+  .close {
+    width: 100%;
+    align-items: flex-end;
+    justify-content: flex-end;
+    display: flex;
+    margin-bottom: 4px;
+  }
   p {
     text-align: center;
     color: #a0a0a0;
     font-size: 1.2rem;
     line-height: 2rem;
     margin-bottom: 12px;
+
+    width: 90%;
+  }
+  h1 {
+    font-size: 1.2rem;
+    margin-top: 12px;
   }
   @media (max-width: 800px) {
     width: 90%;
     p {
+      font-size: 1.6rem;
+    }
+    h1 {
       font-size: 1.6rem;
     }
   }

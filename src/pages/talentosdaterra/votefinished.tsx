@@ -1,27 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import {
   Container,
   Content,
   Header,
   Footer,
-  ParticipantsContainer,
-  ButtonParticipant,
   PopUpVoting,
-  Button
+  Button,
+  ContentVoteAgain
 } from '../../styles/pages/votacao'
+import ReactLoading from 'react-loading'
 import logoCascaria from '../../assets/logoCascaria.svg'
 import { candidates } from '../../assets/candidates'
-import ReactLoading from 'react-loading'
 import { X } from 'react-feather'
 
-const Votacao: React.FC = () => {
-  const [selectedCompetitor, setSelectedCompetitor] = useState(-1)
+const VoteFinished: React.FC = () => {
   const REGISTER_VOTE_URL =
     'https://us-central1-juniorcascaria-4fba1.cloudfunctions.net/registerVote'
   const PUBLIC_KEY = '6Lfvx2AbAAAAAEsb-asgEwig6gRye5T7IdFCPIny'
+  const [token, setToken] = useState()
+  const [openVote, setOpenVote] = useState(false)
+  const [selectedCompetitor, setSelectedCompetitor] = useState(-1)
   const [voteConfirmed, setVoteConfirmed] = useState(false)
+  const [voteCount, setVoteCount] = useState(1)
   const [loading, setLoading] = useState(false)
+
+  function onChange(value: any) {
+    setToken(value)
+    console.log('Captcha value:', value)
+  }
 
   async function submit(token: string) {
     try {
@@ -39,15 +46,19 @@ const Votacao: React.FC = () => {
           })
         })
         const content = await rawResponse.json()
+        if (content?.status) {
+          throw new Error()
+        }
+        console.log(content)
+        setLoading(false)
+        setVoteConfirmed(false)
+        setOpenVote(false)
         const storageID = 'candidate_' + selectedCompetitor
         const localCount = parseInt(localStorage.getItem(storageID) || '0')
         localStorage.setItem(storageID, (localCount + 1).toString())
-        location.replace(
-          '/talentosdaterra/votefinished?selected=' + selectedCompetitor
-        )
+        setVoteCount(localCount + 1)
       }
     } catch (err) {
-      console.log(err)
       alert('Erro: não foi possível efetuar o voto, Tente novamente')
       location.reload()
     }
@@ -64,79 +75,49 @@ const Votacao: React.FC = () => {
     return voterID
   }
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search)
+    if (urlParams.has('selected')) {
+      const candidateIndex = parseInt(urlParams.get('selected') || '-1')
+      setSelectedCompetitor(candidateIndex)
+      const storageID = 'candidate_' + candidateIndex
+      const localCount = parseInt(localStorage.getItem(storageID) || '0')
+      setVoteCount(localCount)
+    } else {
+      location.replace('/talentosdaterra/vote')
+    }
+  }, [])
+
   return (
     <Container>
       <Header>
         <img src={logoCascaria} />
       </Header>
       <Content>
-        <h1>
-          <b>Escolha seu Talento</b>
-        </h1>
-        <span>
-          A sua votação em cada candidato é contabilizada como 1 voto e pode ser
-          realizada quantas vezes você quiser.
-        </span>
-        <ParticipantsContainer>
-          {candidates.map((item, index) => {
-            return (
-              <ButtonParticipant
-                key={index}
-                selected={selectedCompetitor === index}
-                onClick={() => (
-                  // eslint-disable-next-line no-sequences
-                  setSelectedCompetitor(index), setVoteConfirmed(false)
-                )}
-              >
-                <div className="description">
-                  <h2>{item.name}</h2>
-                  <h3>{item.city}</h3>
-                </div>
-                <img src={item.avatar} />
-              </ButtonParticipant>
-            )
-          })}
-        </ParticipantsContainer>
+        <ContentVoteAgain>
+          <h1>
+            <b>Você votou em</b>
+          </h1>
+          <img src={candidates[selectedCompetitor]?.avatar} />
+          <span>{candidates[selectedCompetitor]?.name}</span>
+          <h3>{voteCount} vezes consecutivas!</h3>
+          <Button onClick={() => setOpenVote(true)}>Votar Novamente</Button>
+        </ContentVoteAgain>
       </Content>
-      {selectedCompetitor >= 0 && (
+      {openVote && (
         <PopUpVoting>
           <div className="close">
-            <X
-              color="#8d8d8d"
-              size={22}
-              onClick={() => setSelectedCompetitor(-1)}
-            />
+            <X color="#8d8d8d" size={22} onClick={() => setOpenVote(false)} />
           </div>
           {!loading ? (
             <>
-              {' '}
-              {!voteConfirmed ? (
-                <>
-                  <p>
-                    Você selecionou{' '}
-                    <b>
-                      {candidates.map(
-                        (item, index) =>
-                          selectedCompetitor === index && item.name
-                      )}
-                    </b>
-                    , para votar clique no botão abaixo:
-                  </p>
-                  <Button onClick={() => setVoteConfirmed(true)}>
-                    Confirmar
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <p>Precisamos verificar que você não é um robô</p>
-                  <ReCAPTCHA
-                    sitekey={PUBLIC_KEY}
-                    // eslint-disable-next-line no-sequences
-                    onChange={token => (submit(token || ''), setLoading(true))}
-                    size="compact"
-                  />
-                </>
-              )}
+              <p>Precisamos verificar que você não é um robô</p>
+              <ReCAPTCHA
+                sitekey={PUBLIC_KEY}
+                // eslint-disable-next-line no-sequences
+                onChange={token => (submit(token || ''), setLoading(true))}
+                size="compact"
+              />
             </>
           ) : (
             <>
@@ -177,4 +158,4 @@ const Votacao: React.FC = () => {
   )
 }
 
-export default Votacao
+export default VoteFinished
