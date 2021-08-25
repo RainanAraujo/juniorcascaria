@@ -14,7 +14,7 @@ import rony from './rony.svg'
 export const candidates = [
   { name: 'Adoniran Judson', city: 'Codó', avatar: adoniran },
   { name: 'Adryan Silva', city: 'Poção de Pedras', avatar: adryanSilva },
-  { name: 'Breno Borges', city: 'Esperantinópolis', avatar: breno },
+  { name: 'Brenno Borges', city: 'Esperantinópolis', avatar: breno },
   {
     name: 'Cláudia Andrade',
     city: 'Barra do Corda',
