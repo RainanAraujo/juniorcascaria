@@ -12,16 +12,15 @@ export const Container = styled.div`
 `
 
 export const Header = styled.div`
-  height: 150px;
   max-width: 1080px;
-  padding: 0 30px;
+  padding: 40px 40px;
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   img {
-    width: 150px;
+    height: 60px;
   }
 `
 
@@ -29,11 +28,12 @@ export const Content = styled.div`
   @media (max-width: 800px) {
     width: 90%;
     margin-bottom: 100px;
+    min-height: 50vh;
   }
-
+  min-height: 57vh;
   max-width: 1280px;
   width: 100%;
-  min-height: 75vh;
+  margin-bottom: 40px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -91,7 +91,6 @@ export const ContentVoteAgain = styled.div`
 
 export const Footer = styled.div`
   width: 100%;
-  margin-top: 50px;
   background-color: #e0d394;
   div {
     margin: 0 auto;
@@ -238,6 +237,22 @@ export const PopUpVoting = styled.div`
     }
     h1 {
       font-size: 1.6rem;
+    }
+  }
+`
+
+export const CascariaContent = styled.div`
+  display: flex;
+  .logo {
+    width: 210px;
+    @media (max-width: 800px) {
+      width: 140px;
+    }
+  }
+  .photo {
+    width: 260px;
+    @media (max-width: 800px) {
+      width: 160px;
     }
   }
 `

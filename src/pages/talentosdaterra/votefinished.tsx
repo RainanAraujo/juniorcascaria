@@ -7,9 +7,11 @@ import {
   Footer,
   PopUpVoting,
   Button,
-  ContentVoteAgain
+  ContentVoteAgain,
+  CascariaContent
 } from '../../styles/pages/votacao'
 import ReactLoading from 'react-loading'
+import cascaria from '../../assets/cascaria.svg'
 import logoCascaria from '../../assets/logoCascaria.svg'
 import { candidates } from '../../assets/candidates'
 import { X } from 'react-feather'
@@ -46,10 +48,9 @@ const VoteFinished: React.FC = () => {
           })
         })
         const content = await rawResponse.json()
-        if (content?.status) {
-          throw new Error()
+        if (rawResponse.status !== 200) {
+          throw new Error(content?.error)
         }
-        console.log(content)
         setLoading(false)
         setVoteConfirmed(false)
         setOpenVote(false)
@@ -59,8 +60,16 @@ const VoteFinished: React.FC = () => {
         setVoteCount(localCount + 1)
       }
     } catch (err) {
-      alert('Erro: não foi possível efetuar o voto, Tente novamente')
-      location.reload()
+      if (err?.message === 'vote closed') {
+        alert('Votação encerrada')
+        setLoading(false)
+        setVoteConfirmed(false)
+        setOpenVote(false)
+      } else {
+        alert('Erro: não foi possível efetuar o voto, Tente novamente')
+        location.reload()
+      }
+      console.log(err)
     }
   }
 
@@ -90,9 +99,7 @@ const VoteFinished: React.FC = () => {
 
   return (
     <Container>
-      <Header>
-        <img src={logoCascaria} />
-      </Header>
+      <Header></Header>
       <Content>
         <ContentVoteAgain>
           <h1>
@@ -104,6 +111,10 @@ const VoteFinished: React.FC = () => {
           <Button onClick={() => setOpenVote(true)}>Votar Novamente</Button>
         </ContentVoteAgain>
       </Content>
+      <CascariaContent>
+        <img src={cascaria} className="photo" />
+        <img src={logoCascaria} className="logo" />
+      </CascariaContent>
       {openVote && (
         <PopUpVoting>
           <div className="close">

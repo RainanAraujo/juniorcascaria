@@ -7,7 +7,7 @@ import dilzaSiqueira from './dilzaSiqueira.svg'
 import gilly from './gilly.svg'
 import giovanne from './giovanne.svg'
 import isadora from './isadora.svg'
-import jessica from './jessica.svg'
+import jhonny from './jhonny.svg'
 import rayanne from './rayanne.svg'
 import rony from './rony.svg'
 
@@ -29,7 +29,7 @@ export const candidates = [
     city: 'São Raimundo do Doca Bezerra',
     avatar: isadora
   },
-  { name: 'Jéssica Catanhede', city: 'Codó', avatar: jessica },
+  { name: 'Jhonny Souza', city: 'Santo Antônio dos Lopes', avatar: jhonny },
   {
     name: 'Rayanne Gabrielle',
     city: "Olho D'agua das Cunhãs",

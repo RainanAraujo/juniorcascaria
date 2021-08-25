@@ -13,6 +13,7 @@ import {
 import logoCascaria from '../../assets/logoCascaria.svg'
 import { candidates } from '../../assets/candidates'
 import ReactLoading from 'react-loading'
+
 import { X } from 'react-feather'
 
 const Votacao: React.FC = () => {
@@ -39,6 +40,9 @@ const Votacao: React.FC = () => {
           })
         })
         const content = await rawResponse.json()
+        if (rawResponse.status !== 200) {
+          throw new Error(content?.error)
+        }
         const storageID = 'candidate_' + selectedCompetitor
         const localCount = parseInt(localStorage.getItem(storageID) || '0')
         localStorage.setItem(storageID, (localCount + 1).toString())
@@ -47,9 +51,14 @@ const Votacao: React.FC = () => {
         )
       }
     } catch (err) {
+      if (err?.message === 'vote closed') {
+        alert('Votação encerrada')
+        setSelectedCompetitor(-1)
+      } else {
+        alert('Erro: não foi possível efetuar o voto, Tente novamente')
+        location.reload()
+      }
       console.log(err)
-      alert('Erro: não foi possível efetuar o voto, Tente novamente')
-      location.reload()
     }
   }
 

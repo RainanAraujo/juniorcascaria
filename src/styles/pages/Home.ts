@@ -174,15 +174,15 @@ export const Button = styled.button`
   padding: 16px 32px;
   font-weight: 500;
   border-radius: 5px;
-  margin-top: 20px;
-  margin-right: 12px;
+
   transition: 0.3s;
+
   cursor: pointer;
   @media (max-width: 800px) {
     width: 100%;
     margin-top: 14x;
     padding: 24px 32px;
-    font-size: 16px;
+    font-size: 2rem;
   }
   ${(p: Props) =>
     p.outlined
@@ -204,8 +204,17 @@ export const Button = styled.button`
 export const ButtonGroup = styled.div`
   display: flex;
   width: 100%;
+  margin-top: 29px;
+  align-items: center;
+  img {
+    width: 200px;
+  }
   @media (max-width: 800px) {
     flex-direction: column;
+    justify-content: center;
+    img {
+      width: 100%;
+    }
   }
 `
 

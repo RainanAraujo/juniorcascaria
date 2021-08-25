@@ -25,6 +25,7 @@ import posto from '../assets/posto.svg'
 import selecteds from '../assets/selecteds.svg'
 import surpCorreao from '../assets/surpCorreao.svg'
 import PopUpImage from '../styles/components/PopUpImage'
+import cascaria from '../assets/cascaria.svg'
 
 const Home2: React.FC = () => {
   const [schedulePopUp, setSchedulePopUp] = useState(false)
@@ -46,22 +47,17 @@ const Home2: React.FC = () => {
           <BackgroundContentMain>
             <WrapperContentMain>
               <Description>
-                <h1>Vem ai, o maior concurso musical do ano!</h1>
-                <span>
+                <h1>A votação está aberta. Escolha seu Talento!</h1>
+                {/* <span>
                   Já estão disponíves a lista dos 12 classificados! Dia 26 de
                   outubro é nossa grande live. Venha prestigiar os talentos da
                   nossa terra!
-                </span>
+                </span> */}
                 <ButtonGroup>
-                  <Button onClick={() => setSelectedPopUp(true)}>
-                    Selecionados
-                  </Button>
-                  <Button
-                    onClick={() => setSchedulePopUp(true)}
-                    outlined={true}
-                  >
-                    Cronograma
-                  </Button>
+                  <img src={cascaria} />
+                  <Link href="/talentosdaterra/vote">
+                    <Button>Votar</Button>
+                  </Link>
                 </ButtonGroup>
               </Description>
               <Graphics>
