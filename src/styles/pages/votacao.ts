@@ -50,10 +50,11 @@ export const Content = styled.div`
   }
   span {
     text-align: center;
-    color: #a0a0a0;
+    color: #8d8d8d;
     font-size: 1.2rem;
     line-height: 2rem;
     width: 400px;
+
     @media (max-width: 800px) {
       width: 100%;
       font-size: 1.4rem;
@@ -77,7 +78,15 @@ export const ContentVoteAgain = styled.div`
   align-items: center;
   flex-direction: column;
   width: 400px;
-
+  h2 {
+    text-align: center;
+    color: #a0a0a0;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    width: 300px;
+    margin-top: 20px;
+    font-weight: 400;
+  }
   h3 {
     font-size: 1.6rem;
     margin-top: 6px;
@@ -113,7 +122,7 @@ export const Button = styled.button`
     width: 100%;
   }
   font-weight: 500;
-
+  font-size: 1.6rem;
   border-radius: 5px;
   margin-top: 12px;
   transition: 0.3s;

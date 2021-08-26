@@ -106,9 +106,15 @@ const VoteFinished: React.FC = () => {
             <b>Você votou em</b>
           </h1>
           <img src={candidates[selectedCompetitor]?.avatar} />
-          <span>{candidates[selectedCompetitor]?.name}</span>
+          <span>
+            <b>{candidates[selectedCompetitor]?.name}</b>
+          </span>
           <h3>{voteCount} vezes consecutivas!</h3>
           <Button onClick={() => setOpenVote(true)}>Votar Novamente</Button>
+          <h2>
+            É hoje, a partir das <b>20H</b> a grande{' '}
+            <b>live Talentos da Terra!</b>
+          </h2>
         </ContentVoteAgain>
       </Content>
       <CascariaContent>

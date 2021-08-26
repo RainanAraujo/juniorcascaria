@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import {
   Container,
@@ -12,7 +12,8 @@ import {
   Graphics,
   ContentSecond,
   BackgroundContentMain,
-  ButtonGroup
+  ButtonGroup,
+  ButtonLive
 } from '../styles/pages/Home'
 import logoCascaria from '../assets/logoCascaria.svg'
 import logoEvento from '../assets/logoEvento.svg'
@@ -26,10 +27,24 @@ import selecteds from '../assets/selecteds.svg'
 import surpCorreao from '../assets/surpCorreao.svg'
 import PopUpImage from '../styles/components/PopUpImage'
 import cascaria from '../assets/cascaria.svg'
-
+import YouTube from 'react-youtube'
+import { CascariaContent } from '../styles/pages/votacao'
 const Home2: React.FC = () => {
   const [schedulePopUp, setSchedulePopUp] = useState(false)
   const [selectedPopUp, setSelectedPopUp] = useState(false)
+  const [width, setWidth] = useState(0)
+  const [height, setHeight] = useState(0)
+
+  const handleWindowResize = () => {
+    setWidth(window.innerWidth)
+    setHeight(window.innerHeight)
+  }
+
+  useEffect(() => {
+    handleWindowResize()
+    window.addEventListener('resize', handleWindowResize)
+    return () => window.removeEventListener('resize', handleWindowResize)
+  }, [])
   return (
     <Container>
       {schedulePopUp && (
@@ -45,14 +60,23 @@ const Home2: React.FC = () => {
       <Content>
         <ContentMain>
           <BackgroundContentMain>
-            <WrapperContentMain>
+            <YouTube
+              videoId="0_QAPH7PBWQ"
+              opts={
+                width > 800
+                  ? { height: '490', width: '840' }
+                  : { height: '190', width: '100%' }
+              }
+            />
+            <img src={stage} className="stage" />
+            {/* <WrapperContentMain>
               <Description>
-                <h1>A votação está aberta. Escolha seu Talento!</h1>
-                {/* <span>
+                <h1>É Hoje! A grande live dos Talentos da Terra!</h1>
+               <span>
                   Já estão disponíves a lista dos 12 classificados! Dia 26 de
                   outubro é nossa grande live. Venha prestigiar os talentos da
                   nossa terra!
-                </span> */}
+                </span> 
                 <ButtonGroup>
                   <img src={cascaria} />
                   <Link href="/talentosdaterra/vote">
@@ -62,12 +86,24 @@ const Home2: React.FC = () => {
               </Description>
               <Graphics>
                 <img src={logoEvento} className="logo" />
-                <img src={stage} className="stage" />
+                <img src={stage} className="stage" /> 
+                <Link href="/talentosdaterra/live">
+                  <ButtonLive>Assista a grande Live</ButtonLive>
+                </Link>
               </Graphics>
-            </WrapperContentMain>
+            </WrapperContentMain> */}
           </BackgroundContentMain>
         </ContentMain>
         <ContentSecond>
+          <ButtonGroup>
+            <Button onClick={() => window.open('https://youtu.be/0_QAPH7PBWQ')}>
+              Assistir no YouTube
+            </Button>
+
+            <Link href="/talentosdaterra/vote">
+              <Button outlined={true}>Vote no seu talento</Button>
+            </Link>
+          </ButtonGroup>
           <div className="wrapper">
             <h1>Apoio</h1>
             <div className="logoSponsorship">
@@ -77,8 +113,13 @@ const Home2: React.FC = () => {
               <img src={surpCorreao} />
             </div>
           </div>
+          <CascariaContent>
+            <img src={cascaria} className="photo" />
+            <img src={logoCascaria} className="logo" />
+          </CascariaContent>
         </ContentSecond>
       </Content>
+
       <Footer>
         <div>
           <span>© 2021 Todos os direitos reservados</span>
