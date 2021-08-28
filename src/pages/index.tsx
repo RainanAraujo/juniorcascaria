@@ -99,10 +99,6 @@ const Home2: React.FC = () => {
             <Button onClick={() => window.open('https://youtu.be/0_QAPH7PBWQ')}>
               Assistir no YouTube
             </Button>
-
-            <Link href="/talentosdaterra/vote">
-              <Button outlined={true}>Vote no seu talento</Button>
-            </Link>
           </ButtonGroup>
           <div className="wrapper">
             <h1>Apoio</h1>
